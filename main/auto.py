@@ -61,7 +61,7 @@ def sharpen_image(img: Image.Image) -> Image.Image:
     """Sharpen and preprocess an image for OCR on boxed capital letters."""
 
     img = img.convert('L')
-    img = img.resize((img.width * 5, img.height * 5), resample=Image.Resampling.LANCZOS)
+    img = img.resize((img.width * 6, img.height * 6), resample=Image.Resampling.LANCZOS)
 
     img = img.point(lambda x: 255 if x < 30 else 0) # Reverse point to remove boxes
 
@@ -87,7 +87,13 @@ def get_image() -> Image.Image:
 
     screenshot = pyautogui.screenshot(region=(925, 760, 110, 90))
     screenshot = sharpen_image(screenshot)
-    # screenshot.save(os.path.dirname(__file__) + f'/images/{time.asctime()}.png')
+
+    if args.debug:
+        try:
+            os.mkdir('images')
+        except FileExistsError:
+            pass
+        screenshot.save(f'images/{time.strftime('%H:%M:%S', time.localtime())}.png')
     return screenshot
 
 
