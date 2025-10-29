@@ -6,7 +6,7 @@
     * The dots appear every time the script checks whose turn it is.
 2. Once it is your turn, the bot will read the screen and send keystrokes to submit a word that fits within the combination.
 
-You may also provide the `-d` parameter to see debug messages.
+You may also provide the `-d` parameter to see debug messages as well as automatically save the processed images sent to the OCR.
 
 ## `manual.py`
 
